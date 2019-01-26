@@ -1,7 +1,9 @@
 package com.konped.controllers;
 
 import com.konped.data.CategoryRepository;
+import com.konped.data.GifRepository;
 import com.konped.model.Category;
+import com.konped.model.Gif;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -16,6 +18,8 @@ public class CategoryController {
 
   @Autowired()
   private CategoryRepository categoryRepository;
+  @Autowired
+  private GifRepository gifRepo;
 
   @RequestMapping(value = "/categories", method = RequestMethod.GET)
   public String categories(ModelMap modelMap) {
@@ -28,6 +32,8 @@ public class CategoryController {
   public String getCategoryById(@PathVariable("id") int id, ModelMap modelMap) {
     Category category = categoryRepository.findById(id);
     modelMap.addAttribute(category);
+    List<Gif> categorizedGifs = gifRepo.findCategoryById(id);
+    modelMap.addAttribute("categorizedGifs", categorizedGifs);
     return "category";
   }
 }
