@@ -49,8 +49,8 @@
         with the value of the 'name' field of the 'category'
         object from the model map
     -->
-    <div class="chip">category name</div>
-    <div class="row">
+    <div th:text="${category.name}" class="chip"></div>
+    <div th:each="gif : ${categorizedGifs}" class="row">
         <!--
             Repeat the div element for each object in the 'gifs'
             collection of the model map. Each object in the loop
@@ -62,20 +62,20 @@
                     the GIF detail page using the 'name' field of
                     the 'gif' object from the loop above
              -->
-            <a>
+            <a th:href="@{'/gif/' + ${gif.name}}">
                 <!--
                     In the img tag, make the src attribute point
                     to the static GIF image, according to the 'name'
                     field of the 'gif' object from the loop above
                 -->
-                <img src="http://placehold.it/200x200" />
+                <img th:src="@{'/gifs/' + ${gif.name} + '.gif'}"/>
                 <!--
                     In the a tag, make the class attribute have the value
                     of 'mark favorite' or 'unmark favorite' according to
                     the 'favorite' field of the 'gif' object from the
                     loop above
                 -->
-                <a href="#" class="mark favorite"></a>
+                <a href="#" th:class="(${gif.favorite} ? 'unmark' : 'mark') + ' favorite'"></a>
             </a>
         </div>
     </div>
