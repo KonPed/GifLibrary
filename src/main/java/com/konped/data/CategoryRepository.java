@@ -15,7 +15,7 @@ public class CategoryRepository {
           new Category(3, "Destruction")
   );
 
-  public static List<Category> getAllCategories() {
+  public List<Category> getAllCategories() {
     return ALL_CATEGORIES;
   }
 
