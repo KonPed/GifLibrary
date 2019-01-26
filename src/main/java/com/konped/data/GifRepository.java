@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class GifRepository {
@@ -29,4 +30,7 @@ public class GifRepository {
             .orElse(null);
   }
 
+  public List<Gif> findCategoryById(int categoryId) {
+    return ALL_GIFS.stream().filter(gif -> gif.getCategoryId() == categoryId).collect(Collectors.toList());
+  }
 }
