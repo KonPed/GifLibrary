@@ -18,4 +18,8 @@ public class CategoryRepository {
   public static List<Category> getAllCategories() {
     return ALL_CATEGORIES;
   }
+
+  public Category findById(int id) {
+    return ALL_CATEGORIES.stream().filter(category -> category.getId() == id).findAny().orElse(null);
+  }
 }
