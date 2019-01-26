@@ -44,7 +44,7 @@
     </div>
 </div>
 <div class="categories container">
-    <div class="row">
+    <div class="row" th:each="category : ${categories}">
         <!--
             Repeat the div element for each object in the 'categories'
             collection of the model map. Each object in the loop
@@ -63,7 +63,7 @@
                             coming from the 'name' field of the 'category' object
                             in the model map
                         -->
-                        <a>Category Name</a>
+                        <a th:text="${category.name}"></a>
                     </div>
                 </div>
             </div>
