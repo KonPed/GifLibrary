@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.List;
+
 @Controller
 public class GifController {
 
@@ -16,7 +18,9 @@ public class GifController {
   private GifRepository gifRepo;
 
   @RequestMapping("/")
-  public String listGifs() {
+  public String listGifs(ModelMap modelMap) {
+    List<Gif> gifList = gifRepo.getAllGifs();
+    modelMap.addAttribute(gifList);
     return "home";
   }
 
