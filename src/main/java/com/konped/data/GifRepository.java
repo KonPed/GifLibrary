@@ -1,11 +1,13 @@
 package com.konped.data;
 
 import com.konped.model.Gif;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
+@Component
 public class GifRepository {
 
   private static final List<Gif> ALL_GIFS = Arrays.asList(
