@@ -2,26 +2,29 @@ package com.konped.controllers;
 
 import com.konped.data.GifRepository;
 import com.konped.model.Gif;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class GifController {
 
-  private GifRepository gifRepo = new GifRepository();
+  @Autowired
+  private GifRepository gifRepo;
 
   @RequestMapping("/")
   public String listGifs() {
     return "home";
   }
 
-  @RequestMapping(value = "/gif", method = RequestMethod.GET)
-  public String gifDetails(@RequestParam("name") String name, ModelMap modelMap) {
-    Gif gif = gifRepo.findByName(name);
+  @RequestMapping(value = "/gif/{name}", method = RequestMethod.GET)
+  public String gifDetails(@PathVariable("name") String gifName, ModelMap modelMap) {
+    Gif gif = gifRepo.findByName(gifName);
     modelMap.addAttribute(gif);
+    modelMap.addAttribute("localDate", gif.getDateUploaded());
     return "gif-details";
   }
 
