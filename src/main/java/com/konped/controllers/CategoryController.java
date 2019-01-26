@@ -19,7 +19,7 @@ public class CategoryController {
   @RequestMapping(value = "/categories", method = RequestMethod.GET)
   public String categories(ModelMap modelMap) {
     List<Category> categories = categoryRepository.getAllCategories();
-    modelMap.addAttribute(categories);
+    modelMap.addAttribute("categories", categories);
     return "categories";
   }
 }
