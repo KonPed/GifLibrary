@@ -63,7 +63,7 @@
                             coming from the 'name' field of the 'category' object
                             in the model map
                         -->
-                        <a th:text="${category.name}"></a>
+                        <a th:href="@{'category/' + ${category.id}}" th:text="${category.name}"></a>
                     </div>
                 </div>
             </div>
