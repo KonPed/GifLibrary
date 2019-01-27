@@ -50,13 +50,13 @@
         object from the model map
     -->
     <div th:text="${category.name}" class="chip"></div>
-    <div th:each="gif : ${categorizedGifs}" class="row">
+    <div class="row">
         <!--
             Repeat the div element for each object in the 'gifs'
             collection of the model map. Each object in the loop
             should be named 'gif'
         -->
-        <div class="col s12 l4">
+        <div th:each="gif : ${categorizedGifs}" class="col s12 l4">
             <!--
                     In the a tag, make the href attribute point to
                     the GIF detail page using the 'name' field of

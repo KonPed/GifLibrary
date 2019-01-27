@@ -44,13 +44,13 @@
     </div>
 </div>
 <div class="categories container">
-    <div class="row" th:each="category : ${categories}">
+    <div class="row">
         <!--
             Repeat the div element for each object in the 'categories'
             collection of the model map. Each object in the loop
             should be named 'category'
         -->
-        <div class="col s12 l4">
+        <div th:each="category : ${categories}" class="col s12 l4">
             <div class="card">
                 <div class="card-content">
                     <div class="card-title">
