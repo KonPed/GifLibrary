@@ -16,7 +16,7 @@ import java.util.List;
 @Controller
 public class CategoryController {
 
-  @Autowired()
+  @Autowired
   private CategoryRepository categoryRepository;
   @Autowired
   private GifRepository gifRepo;
