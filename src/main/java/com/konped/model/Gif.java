@@ -1,14 +1,27 @@
 package com.konped.model;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
+@Entity
 public class Gif {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private int id;
+  @Column
   private String name;
+  @Column
   private int categoryId;
+  @Column
   private LocalDate dateUploaded;
+  @Column
   private String username;
+  @Column
   private boolean favorite;
 
+  public Gif() {
+
+  }
   public Gif(String name, int categoryId, LocalDate dateUploaded,
              String username, boolean favorite) {
     this.name = name;

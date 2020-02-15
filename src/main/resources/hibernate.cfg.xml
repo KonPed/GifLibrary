@@ -1,5 +1,16 @@
 <hibernate-configuration>
     <session-factory>
+<!--        <property name="connection.driver_class">org.h2.Driver</property>-->
+<!--&lt;!&ndash;        <property name="connection.url">jdbc:h2:tcp://localhost/~/Desktop/GifLibrary/data/test</property>&ndash;&gt;-->
+<!--        <property name="connection.url">jdbc:h2:file:~/Desktop/GifLibrary/database/giflib</property>-->
+<!--        <property name="dialect">org.hibernate.dialect.H2Dialect</property>-->
+<!--        <property name="hibernate.hbm2ddl.auto">update</property>-->
+<!--        <property name="hibernate.connection.username">sa</property>-->
+<!--        <property name="hibernate.connection.password"/>-->
+<!--        <property name="show_sql">true</property>-->
+
+<!--        <mapping class="com.konped.model.Category"/>-->
+<!--        <mapping class="com.konped.model.Gif"/>-->
 
     </session-factory>
 </hibernate-configuration>
