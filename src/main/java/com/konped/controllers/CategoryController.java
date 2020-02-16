@@ -10,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -63,19 +61,52 @@ public class CategoryController {
     return new ModelAndView("redirect:/categories");
   }
 
+  @PostMapping("/categories/{categoryId}")
+  public ModelAndView updateCaregory(@Valid Category category, BindingResult bindingResult, @RequestParam("id") Long id, RedirectAttributes redirectAttributes) {
+    if (bindingResult.hasErrors()) {
+      /* Include validation errors upon redirect. */
+      redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.category", bindingResult);
+      /* Persist category obj upon redirect - not having the user to repeat information. */
+      redirectAttributes.addFlashAttribute("category", category);
+      /* Persist the flash message. */
+      redirectAttributes.addFlashAttribute("flash", new FlashMessage("Failed to update category", FlashMessage.Status.FAILURE));
+      return new ModelAndView("redirect:/categories/" + category.getId() + "/edit");
+    }
+    categoryService.save(category);
+    redirectAttributes.addFlashAttribute("flash", new FlashMessage("Category succesfully updated.", FlashMessage.Status.SUCCESS));
+    return new ModelAndView("redirect:/categories");
+  }
+
   @GetMapping("/categories/add")
   public String formNewCategory(ModelMap model) {
     if (!model.containsAttribute("category")) {
       model.addAttribute("category", new Category());
     }
+    model.addAttribute("action", "/categories");
+    model.addAttribute("heading", "New Category");
+    model.addAttribute("submit", "Add");
     return "form";
   }
 
   @GetMapping("/categories/{categoryId}/edit")
-  public String updateCategory(@PathVariable("categoryId") Long categoryId, ModelMap modelMap) {
+  public String formEditCategory(@PathVariable("categoryId") Long categoryId, ModelMap modelMap) {
     if (!modelMap.containsAttribute("category")) {
       modelMap.addAttribute("category", categoryService.findCategoryByID(categoryId));
     }
+    modelMap.addAttribute("action", String.format("/categories/%s", categoryId));
+    modelMap.addAttribute("heading", "Edit Category");
+    modelMap.addAttribute("submit", "Update");
     return "form";
+  }
+
+  @PostMapping("/categories/{categoryId}/delete")
+  public ModelAndView deleteCategory(@RequestParam("id") Long id, RedirectAttributes redirectAttributes) {
+    Category category = categoryService.findCategoryByID(id);
+//    if (category != null) {
+//      redirectAttributes.addFlashAttribute("flash", new FlashMessage("Only empty categories can be deleted", FlashMessage.Status.FAILURE));
+//      return new ModelAndView("redirect:/categories/" + id + "/edit");
+//    }
+    categoryService.delete(category);
+    return new ModelAndView("redirect:/categories");
   }
 }
