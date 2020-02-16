@@ -8,11 +8,9 @@ import com.konped.model.Gif;
 import com.konped.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -39,7 +37,7 @@ public class CategoryController {
   }
 
   @GetMapping("/category/{id}")
-  public String getCategoryById(@PathVariable("id") int id, ModelMap modelMap) {
+  public String getCategoryById(@PathVariable("id") Long id, ModelMap modelMap) {
     Category category = categoryRepository.findById(id);
     modelMap.addAttribute(category);
     List<Gif> categorizedGifs = gifRepo.findCategoryById(id);
@@ -69,6 +67,14 @@ public class CategoryController {
   public String formNewCategory(ModelMap model) {
     if (!model.containsAttribute("category")) {
       model.addAttribute("category", new Category());
+    }
+    return "form";
+  }
+
+  @GetMapping("/categories/{categoryId}/edit")
+  public String updateCategory(@PathVariable("categoryId") Long categoryId, ModelMap modelMap) {
+    if (!modelMap.containsAttribute("category")) {
+      modelMap.addAttribute("category", categoryService.findCategoryByID(categoryId));
     }
     return "form";
   }

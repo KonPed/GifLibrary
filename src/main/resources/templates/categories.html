@@ -45,6 +45,7 @@
                             in the model map
                         -->
                         <a th:href="@{'category/' + ${category.id}}" th:text="${category.name}"></a>
+                        <a class="edit" th:href="@{|/categories/${category.id}/edit|}"><i class="hide-on-med-and-down material-icons">more_horiz</i><i class="hide-on-large-only medium material-icons">more_horiz</i></a>
                     </div>
                 </div>
             </div>

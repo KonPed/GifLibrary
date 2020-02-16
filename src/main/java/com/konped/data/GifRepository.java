@@ -30,7 +30,7 @@ public class GifRepository {
             .orElse(null);
   }
 
-  public List<Gif> findCategoryById(int categoryId) {
+  public List<Gif> findCategoryById(Long categoryId) {
     return ALL_GIFS.stream().filter(gif -> gif.getCategoryId() == categoryId).collect(Collectors.toList());
   }
 }
