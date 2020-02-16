@@ -11,6 +11,8 @@ public class Gif {
   @Column
   private String name;
   @Column
+  private String description;
+  @Column
   private int categoryId;
   @Column
   private LocalDate dateUploaded;
@@ -22,9 +24,10 @@ public class Gif {
   public Gif() {
 
   }
-  public Gif(String name, int categoryId, LocalDate dateUploaded,
+  public Gif(String name, String description, int categoryId, LocalDate dateUploaded,
              String username, boolean favorite) {
     this.name = name;
+    this.description = description;
     this.categoryId = categoryId;
     this.dateUploaded = dateUploaded;
     this.username = username;
@@ -71,4 +74,11 @@ public class Gif {
     this.favorite = favorite;
   }
 
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
 }

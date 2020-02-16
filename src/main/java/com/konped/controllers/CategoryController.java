@@ -53,7 +53,7 @@ public class CategoryController {
     if (bindingResult.hasErrors()) {
       /* Include validation errors upon redirect. */
       redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.category", bindingResult);
-      /* Persist category obj upon redirect - not having the user to retpe information. */
+      /* Persist category obj upon redirect - not having the user to repeat information. */
       redirectAttributes.addFlashAttribute("category", category);
       /* Persist the flash message. */
       redirectAttributes.addFlashAttribute("flash", new FlashMessage("Failed to add category", FlashMessage.Status.FAILURE));
@@ -66,7 +66,7 @@ public class CategoryController {
   }
 
   @GetMapping("/categories/add")
-  public String formNewCategory(Model model, RedirectAttributes redirectAttributes) {
+  public String formNewCategory(ModelMap model) {
     if (!model.containsAttribute("category")) {
       model.addAttribute("category", new Category());
     }
